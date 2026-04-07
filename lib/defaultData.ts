@@ -1,0 +1,67 @@
+import type { Vehicle } from './types';
+
+export const DEFAULT_VEHICLES: Vehicle[] = [
+  {
+    id: 1,
+    emoji: '🚗',
+    year: '2019',
+    make: 'Toyota',
+    model: 'Camry',
+    trim: 'SE · 2.5L I4',
+    mileage: 58420,
+    engineHours: 0,
+    weeklyMiles: 220,
+    trackingUnit: 'miles',
+    vin: '',
+    photo: null,
+    recalls: 1,
+    smartcarId: null,
+    lastServiceMi: {
+      oil: 58420, tires: 49800, airfilter: 53200, cabin: 50000,
+      brakes: 49800, spark: 40000, tranny: 30000, coolant: 20000,
+      newtires: 10000,
+    },
+    lastServiceDate: {
+      oil: '2025-03-14', tires: '2024-04-11', airfilter: '2024-09-18',
+      cabin: '2024-01-10', brakes: '2024-04-11', spark: '2021-06-01',
+      tranny: '2021-06-01', coolant: '2020-01-01', newtires: '2021-03-01',
+    },
+    serviceLog: [
+      { id: 1, service: 'Oil & Filter Change', date: '2025-03-14', mileage: 58420, cost: 68,  shop: 'Jiffy Lube',    notes: '' },
+      { id: 2, service: 'Brake Inspection',    date: '2025-01-22', mileage: 57100, cost: 240, shop: 'Midas',         notes: 'Replaced front pads' },
+      { id: 3, service: 'Full Tune-Up',        date: '2024-12-05', mileage: 55800, cost: 320, shop: 'Toyota Dealer', notes: '' },
+      { id: 4, service: 'Air Filter',          date: '2024-09-18', mileage: 53200, cost: 22,  shop: 'DIY',           notes: '' },
+      { id: 5, service: 'Oil & Filter Change', date: '2024-07-03', mileage: 51400, cost: 65,  shop: 'Valvoline',     notes: '' },
+      { id: 6, service: 'Tire Rotation',       date: '2024-04-11', mileage: 49800, cost: 0,   shop: 'Discount Tire', notes: '' },
+    ],
+  },
+  {
+    id: 2,
+    emoji: '🏍',
+    year: '2021',
+    make: 'Harley-Davidson',
+    model: 'Sportster',
+    trim: '883cc',
+    mileage: 12100,
+    engineHours: 0,
+    weeklyMiles: 80,
+    trackingUnit: 'miles',
+    vin: '',
+    photo: null,
+    recalls: 0,
+    smartcarId: null,
+    lastServiceMi: {
+      oil: 12100, chain: 11500, mctires: 10000, forkoil: 6000,
+      valve: 6000, brakefld: 10000, clutchcbl: 8000, airfilter: 6000,
+    },
+    lastServiceDate: {
+      oil: '2025-02-28', chain: '2025-01-10', mctires: '2024-10-01',
+      forkoil: '2024-06-01', valve: '2024-06-01', brakefld: '2024-08-01',
+      clutchcbl: '2024-08-01', airfilter: '2024-06-01',
+    },
+    serviceLog: [
+      { id: 1, service: 'Oil & Filter Change', date: '2025-02-28', mileage: 12100, cost: 95, shop: 'HD Dealer', notes: '' },
+      { id: 2, service: 'Air Filter',          date: '2024-06-01', mileage: 6000,  cost: 28, shop: 'DIY',       notes: '' },
+    ],
+  },
+];
