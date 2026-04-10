@@ -31,6 +31,7 @@ export default function AddVehiclePage() {
   const [currentVal,   setCurrentVal]   = useState('');
   const [weekly,       setWeekly]       = useState('');
   const [vin,          setVin]          = useState('');
+  const [licensePlate, setLicensePlate] = useState('');
   const [trims,        setTrims]        = useState<string[]>([]);
   const [trim,         setTrim]         = useState('');
   const [trimManual,   setTrimManual]   = useState(false);
@@ -70,10 +71,13 @@ export default function AddVehiclePage() {
       engineHours:  isHours ? raw : 0,
       weeklyMiles:  parseInt(weekly) || 0,
       trackingUnit,
+      licensePlate: licensePlate.toUpperCase(),
+      licensePlate: licensePlate.toUpperCase(),
       vin:          vin.toUpperCase(),
       photo:        null,
       recalls:      0,
-      smartcarId:   null,
+      documents:    [],
+      loans:        [],
       lastServiceMi:   {},
       lastServiceDate: {},
       serviceLog:      [],
@@ -165,15 +169,27 @@ export default function AddVehiclePage() {
           {trims.length > 0 && <div style={{ fontSize:11, color:'var(--text3)', marginTop:5 }}>{trims.length} trims found for {make} {model}</div>}
         </div>
 
-        {/* VIN */}
-        <div className="form-group">
-          <label className="form-label">VIN <span style={{ opacity:.5, textTransform:'none', letterSpacing:0, fontSize:10 }}>(optional)</span></label>
-          <div className="vin-row">
-            <input className="vin-input" style={{ flex:1 }} placeholder="17-character VIN" maxLength={17} value={vin} onChange={e => setVin(e.target.value.toUpperCase())}/>
-            <button className="vin-btn" onClick={() => alert('Point camera at VIN — type what you see')}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-              Scan
-            </button>
+        {/* VIN + License Plate */}
+        <div className="form-row2">
+          <div className="form-group">
+            <label className="form-label">License plate <span style={{ opacity:.5, textTransform:'none', letterSpacing:0, fontSize:10 }}>(optional)</span></label>
+            <input className="form-input" placeholder="e.g. 8ABC123" value={licensePlate} onChange={e => setLicensePlate(e.target.value.toUpperCase())} style={{ textTransform:'uppercase', letterSpacing:1 }}/>
+          </div>
+          <div className="form-group">
+            <label className="form-label">State <span style={{ opacity:.5, textTransform:'none', letterSpacing:0, fontSize:10 }}>(optional)</span></label>
+            <input className="form-input" placeholder="e.g. CA" maxLength={2} style={{ textTransform:'uppercase', letterSpacing:2 }}/>
+          </div>
+        </div>
+
+        {/* License plate + VIN */}
+        <div className="form-row2">
+          <div className="form-group">
+            <label className="form-label">License plate <span style={{ opacity:.5, textTransform:'none', letterSpacing:0, fontSize:10 }}>(optional)</span></label>
+            <input className="form-input" placeholder="e.g. ABC1234" value={licensePlate} onChange={e => setLicensePlate(e.target.value.toUpperCase())} style={{ textTransform:'uppercase', letterSpacing:1 }}/>
+          </div>
+          <div className="form-group">
+            <label className="form-label">VIN <span style={{ opacity:.5, textTransform:'none', letterSpacing:0, fontSize:10 }}>(optional)</span></label>
+            <input className="vin-input" style={{ borderRadius:9, padding:'11px 12px', width:'100%' }} placeholder="17-char VIN" maxLength={17} value={vin} onChange={e => setVin(e.target.value.toUpperCase())}/>
           </div>
         </div>
       </div>

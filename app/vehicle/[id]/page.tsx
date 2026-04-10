@@ -119,7 +119,34 @@ export default function VehicleDetailPage() {
           <div className="vd-action-sub">{v.recalls > 0 ? `${v.recalls} open recall` : 'Check NHTSA'}</div>
           <div className="vd-action-arr">Check →</div>
         </Link>
+        <Link href={`/vehicle/${id}/documents`} className="vd-action">
+          <div style={{ fontSize:18 }}>🛡</div>
+          <div className="vd-action-lbl">Documents</div>
+          <div className="vd-action-sub">{(v.documents ?? []).length > 0 ? `${v.documents.length} stored` : 'Insurance & reg'}</div>
+          <div className="vd-action-arr">View →</div>
+        </Link>
+        <Link href={`/vehicle/${id}/loans`} className="vd-action">
+          <div style={{ fontSize:18 }}>🏦</div>
+          <div className="vd-action-lbl">Loan</div>
+          <div className="vd-action-sub">{(v.loans ?? []).length > 0 ? `$${v.loans[0].remainingBalance.toLocaleString()} left` : 'Track balance'}</div>
+          <div className="vd-action-arr">View →</div>
+        </Link>
       </div>
+
+      {/* KBB Value */}
+      <a
+        href={`https://www.kbb.com/whats-my-car-worth/?make=${encodeURIComponent(v.make)}&model=${encodeURIComponent(v.model)}&year=${v.year}`}
+        target="_blank"
+        rel="noreferrer"
+        style={{ display:'flex', alignItems:'center', gap:12, background:'var(--bg3)', border:'.5px solid var(--border2)', borderRadius:12, padding:'0.875rem 1rem', textDecoration:'none' }}
+      >
+        <div style={{ width:38, height:38, borderRadius:9, background:'rgba(58,127,212,.15)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:18, flexShrink:0 }}>💰</div>
+        <div style={{ flex:1 }}>
+          <div style={{ fontSize:13, fontWeight:500, color:'var(--text)' }}>Check vehicle value on KBB</div>
+          <div style={{ fontSize:11, color:'var(--text3)', marginTop:2 }}>Kelley Blue Book — {v.year} {v.make} {v.model}</div>
+        </div>
+        <span style={{ fontSize:13, color:'var(--accent)', fontWeight:700 }}>↗</span>
+      </a>
 
       {/* Mini maintenance */}
       <div>

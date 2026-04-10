@@ -114,6 +114,16 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   }, [theme]);
 
   const hasRecalls = useStore(s => s.vehicles.some(v => v.recalls > 0));
+  const user       = useStore(s => s.user);
+  const setUser    = useStore(s => s.setUser);
+
+  async function handleSignOut() {
+    try {
+      const { supabase } = await import('@/lib/supabase');
+      await supabase.auth.signOut();
+    } catch { /* ignore */ }
+    setUser(null);
+  }
 
   return (
     <div className="shell" id="app">
@@ -128,7 +138,16 @@ export default function Shell({ children }: { children: React.ReactNode }) {
             <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--text2)" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
             {hasRecalls && <div className="notif-dot"/>}
           </Link>
-          <span className="pro-pill">Pro</span>
+          {user ? (
+            <button onClick={handleSignOut} style={{ width:34, height:34, borderRadius:8, background:'var(--card)', border:'.5px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', fontSize:13, fontWeight:700, fontFamily:'var(--font-barlow-condensed)', color:'var(--accent)' }}>
+              {(user.name ?? user.email)[0].toUpperCase()}
+            </button>
+          ) : (
+            <Link href="/auth" style={{ fontFamily:'var(--font-barlow-condensed)', fontSize:12, fontWeight:700, letterSpacing:'.5px', textTransform:'uppercase', color:'var(--accent)', textDecoration:'none', padding:'5px 10px', borderRadius:8, border:'.5px solid rgba(232,131,42,.3)', background:'rgba(232,131,42,.08)' }}>
+              Sign in
+            </Link>
+          )}
+
         </div>
       </header>
 

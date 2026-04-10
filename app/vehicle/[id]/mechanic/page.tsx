@@ -86,6 +86,14 @@ export default function MechanicPage() {
         </div>
       </div>
 
+      {/* Disclaimer */}
+      <div style={{ background:'rgba(212,135,10,.07)', border:'.5px solid rgba(212,135,10,.2)', borderRadius:10, padding:'9px 13px', display:'flex', gap:9, alignItems:'flex-start' }}>
+        <span style={{ fontSize:14, flexShrink:0, marginTop:1 }}>⚠️</span>
+        <div style={{ fontSize:11, color:'var(--text3)', lineHeight:1.55 }}>
+          AI Mechanic provides general guidance for informational purposes only. Always consult a licensed mechanic before making repair decisions. PitStop is not liable for any outcomes from AI suggestions.
+        </div>
+      </div>
+
       {/* Chat */}
       <div className="chat-wrap">
         <div className="chat-msgs" ref={msgsRef}>
@@ -124,6 +132,12 @@ export default function MechanicPage() {
           </button>
         </div>
       </div>
-    </>
+      {/* Liability disclaimer */}
+      <div style={{ background:'rgba(212,135,10,.07)', border:'.5px solid rgba(212,135,10,.2)', borderRadius:10, padding:'10px 13px', display:'flex', gap:10, alignItems:'flex-start' }}>
+        <span style={{ fontSize:14, flexShrink:0 }}>⚠️</span>
+        <div style={{ fontSize:11, color:'var(--text3)', lineHeight:1.55 }}>
+          <strong style={{ color:'var(--amber)' }}>Informational only.</strong> AI Mechanic provides general guidance and is not a substitute for a licensed mechanic. PitStop is not liable for repair outcomes or mechanical failures. Always consult a professional before making repair decisions.
+        </div>
+      </div>    </>
   );
 }
