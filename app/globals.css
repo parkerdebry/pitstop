@@ -204,6 +204,12 @@ body {
   30%           { transform: translateY(-4px); opacity: 1; }
 }
 
+.page-enter {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
 .page-enter > * {
   animation: fadeUp 0.2s ease both;
 }
