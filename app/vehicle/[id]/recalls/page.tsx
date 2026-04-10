@@ -55,13 +55,15 @@ export default function RecallsPage() {
             <div style={{ fontSize:12, color:'var(--text2)' }}>Check NHTSA safety recalls</div>
           </div>
         </div>
-        <div style={{ display:'flex', gap:8, flexWrap:'wrap', width:'100%' }}>
-          <input className="vin-input" value={vin} onChange={e => setVin(e.target.value.toUpperCase())} placeholder="Enter VIN to search" maxLength={17}/>
-          <button className="vin-btn" onClick={() => { /* camera stub */ alert('Open camera — type VIN shown'); }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            Scan
-          </button>
-          <button className="vin-btn vin-btn-primary" onClick={checkRecalls} style={{ flex:1 }}>Check NHTSA</button>
+        <div style={{ display:'flex', flexDirection:'column', gap:8, width:'100%' }}>
+          <input className="vin-input" value={vin} onChange={e => setVin(e.target.value.toUpperCase())} placeholder="Enter VIN to search (optional)" maxLength={17} style={{ width:'100%' }}/>
+          <div style={{ display:'flex', gap:8 }}>
+            <button className="vin-btn" style={{ flex:1 }} onClick={() => alert('Point camera at VIN — type what you see')}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              Scan VIN
+            </button>
+            <button className="vin-btn vin-btn-primary" onClick={checkRecalls} style={{ flex:2 }}>Check NHTSA</button>
+          </div>
         </div>
         <div style={{ fontSize:11, color:'var(--text3)' }}>Free NHTSA database · Updated daily · No account needed</div>
       </div>

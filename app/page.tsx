@@ -16,7 +16,7 @@ function GarageCard({ v }: { v: Vehicle }) {
       <div className="garage-card-photo" style={{ position:'relative' }}>
         {v.photo
           ? <img src={v.photo} alt="" style={{ width:'100%', height:'100%', objectFit:'cover', position:'absolute', inset:0 }}/>
-          : <span style={{ fontSize:44, opacity:.22 }}>{v.emoji}</span>
+          : <span style={{ fontSize:52, filter:'none' }}>{v.emoji}</span>
         }
       </div>
       <div className="garage-card-body">
