@@ -1,9 +1,16 @@
 'use client';
 
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import type { Vehicle, VehicleDocument, VehicleLoan, UserProfile } from './types';
-import { DEFAULT_VEHICLES } from './defaultData';
+// ── Admin emails — always get Pro access for free ────────────────────
+const ADMIN_EMAILS = [
+  'parkerdebry@gmail.com',
+  'debry.parker1@gmail.com',
+];
+
+export function isAdmin(email: string | null | undefined): boolean {
+  if (!email) return false;
+  return ADMIN_EMAILS.map(e => e.toLowerCase()).includes(email.toLowerCase());
+}
+
 import { defaultTrackingUnit } from './maintenance';
 
 // ─────────────────────────────────────────────
@@ -201,7 +208,7 @@ export const useStore = create<PitStopStore>()(
         }));
       },
 
-      setUser:   (u) => set({ user: u }),
+      setUser:   (u) => set({ user: u, plan: u && isAdmin(u.email) ? 'pro_annual' : get().plan }),
       acceptTos: () => set({ tosAccepted: true }),
       setPlan:   (p) => set({ plan: p }),
       setTheme:  (t) => set({ theme: t }),
