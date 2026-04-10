@@ -774,3 +774,38 @@ body {
   transition: opacity 0.2s;
 }
 .toast.show { opacity: 1; }
+
+/* ─────────────────────────────────────────────
+   EXPLICIT SECTION SPACING — applied to all common section elements
+───────────────────────────────────────────── */
+.ph,
+.stat-grid,
+.card-lg,
+.card,
+.pro-card,
+.s-group,
+.sh,
+.mf-list,
+.h-list,
+.vd-stats,
+.vd-actions,
+.chat-wrap,
+.alert,
+.alert-red,
+.alert-amber,
+.alert-green,
+.garage-card,
+.add-card,
+.recall-card,
+.recall-banner,
+.notif-item,
+.doc-card {
+  margin-bottom: 1.1rem;
+}
+
+/* Remove double-spacing inside lists */
+.mf-list .mf-card,
+.h-list .h-item,
+.s-group .s-row {
+  margin-bottom: 0;
+}
