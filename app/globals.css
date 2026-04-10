@@ -800,7 +800,7 @@ body {
 .recall-banner,
 .notif-item,
 .doc-card {
-  margin-bottom: 0.6rem;
+  margin-bottom: 6px;
 }
 
 /* Remove double-spacing inside lists */
