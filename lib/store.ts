@@ -70,6 +70,7 @@ interface PitStopStore {
   accent:      string;
   user:        UserProfile | null;
   tosAccepted: boolean;
+  plan: 'free' | 'pro_monthly' | 'pro_annual';
 
   // Vehicle CRUD
   addVehicle:    (v: Omit<Vehicle, 'id'>) => void;
@@ -92,6 +93,7 @@ interface PitStopStore {
   // Auth / user
   setUser:       (u: UserProfile | null) => void;
   acceptTos:     () => void;
+  setPlan:       (p: 'free' | 'pro_monthly' | 'pro_annual') => void;
   setTheme:      (t: 'dark' | 'light' | 'auto') => void;
   setAccent:     (color: string) => void;
 }
@@ -108,6 +110,7 @@ export const useStore = create<PitStopStore>()(
       accent:      '#E8832A',
       user:        null,
       tosAccepted: false,
+      plan: 'free',
 
       addVehicle: (v) => {
         const id = get().nextId;
@@ -200,6 +203,7 @@ export const useStore = create<PitStopStore>()(
 
       setUser:   (u) => set({ user: u }),
       acceptTos: () => set({ tosAccepted: true }),
+      setPlan:   (p) => set({ plan: p }),
       setTheme:  (t) => set({ theme: t }),
       setAccent: (c) => set({ accent: c }),
     }),

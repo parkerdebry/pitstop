@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useStore } from '@/lib/store';
 
 // ── Logo SVG ────────────────────────────────────────────────────────
@@ -116,6 +116,14 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   const hasRecalls = useStore(s => s.vehicles.some(v => v.recalls > 0));
   const user       = useStore(s => s.user);
   const setUser    = useStore(s => s.setUser);
+  const router     = useRouter();
+
+  // Auth gate — redirect to /auth if not signed in
+  useEffect(() => {
+    if (!user && path !== '/auth' && !path.startsWith('/auth/')) {
+      router.push('/auth');
+    }
+  }, [user, path, router]);
 
   async function handleSignOut() {
     try {
@@ -123,6 +131,17 @@ export default function Shell({ children }: { children: React.ReactNode }) {
       await supabase.auth.signOut();
     } catch { /* ignore */ }
     setUser(null);
+  }
+
+  // On auth page, render children directly with no chrome
+  const isAuthPage = path === '/auth' || path.startsWith('/auth/');
+  if (isAuthPage) {
+    return (
+      <div className="shell" id="app" style={{ justifyContent:'center' }}>
+        {children}
+        <div className="toast" id="toast-el" aria-live="polite" />
+      </div>
+    );
   }
 
   return (
