@@ -49,7 +49,10 @@ export default function VehicleDetailPage() {
       <div className="ph">
         <button className="back-btn" onClick={() => router.push('/')}>←</button>
         <span className="pt">{v.year} {v.make} {v.model}</span>
-        <button onClick={handleRemove} style={{ marginLeft:'auto', fontSize:12, color:'var(--red)', background:'none', border:'none', cursor:'pointer', fontFamily:'var(--font-barlow-condensed)', fontWeight:700, letterSpacing:'.5px', textTransform:'uppercase' }}>Remove</button>
+        <div style={{ marginLeft:'auto', display:'flex', gap:8 }}>
+          <Link href={`/vehicle/${id}/edit`} className="btn-sm" style={{ textDecoration:'none' }}>✏️ Edit</Link>
+          <button onClick={handleRemove} style={{ fontSize:12, color:'var(--red)', background:'none', border:'none', cursor:'pointer', fontFamily:'var(--font-barlow-condensed)', fontWeight:700, letterSpacing:'.5px', textTransform:'uppercase' }}>Remove</button>
+        </div>
       </div>
 
       {/* Photo */}
