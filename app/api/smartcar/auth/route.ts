@@ -1,9 +1,11 @@
 export const runtime = 'nodejs';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const make = req.nextUrl.searchParams.get('make') ?? undefined;
+
   if (!process.env.SMARTCAR_CLIENT_ID) {
-    return NextResponse.json({ error: 'SmartCar not configured.' }, { status: 503 });
+    return NextResponse.json({ configured: false }, { status: 200 });
   }
   try {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -14,9 +16,13 @@ export async function GET() {
       redirectUri: process.env.SMARTCAR_REDIRECT_URI,
       mode: process.env.NODE_ENV === 'production' ? 'live' : 'simulated',
     });
-    const authUrl = client.getAuthUrl(['read_vehicle_info','read_odometer','read_fuel','read_battery','read_vin']);
-    return NextResponse.json({ url: authUrl });
+    const opts: Record<string, unknown> = {
+      scope: ['read_vehicle_info','read_odometer','read_fuel','read_battery','read_vin'],
+    };
+    if (make) opts.makeBypass = make;
+    const authUrl = client.getAuthUrl(opts.scope as string[], { forcePrompt: true, ...(make ? { makeBypass: make } : {}) });
+    return NextResponse.json({ configured: true, url: authUrl });
   } catch {
-    return NextResponse.json({ error: 'SmartCar not available. Run: npm install smartcar' }, { status: 503 });
+    return NextResponse.json({ configured: false }, { status: 200 });
   }
 }
