@@ -16,6 +16,7 @@ export const DEFAULT_VEHICLES: Vehicle[] = [
     photo: null,
     recalls: 1,
     smartcarId: null,
+    licensePlate: '',
     lastServiceMi: {
       oil: 58420, tires: 49800, airfilter: 53200, cabin: 50000,
       brakes: 49800, spark: 40000, tranny: 30000, coolant: 20000,
@@ -34,6 +35,8 @@ export const DEFAULT_VEHICLES: Vehicle[] = [
       { id: 5, service: 'Oil & Filter Change', date: '2024-07-03', mileage: 51400, cost: 65,  shop: 'Valvoline',     notes: '' },
       { id: 6, service: 'Tire Rotation',       date: '2024-04-11', mileage: 49800, cost: 0,   shop: 'Discount Tire', notes: '' },
     ],
+    documents: [],
+    loans: [],
   },
   {
     id: 2,
@@ -50,6 +53,7 @@ export const DEFAULT_VEHICLES: Vehicle[] = [
     photo: null,
     recalls: 0,
     smartcarId: null,
+    licensePlate: '',
     lastServiceMi: {
       oil: 12100, chain: 11500, mctires: 10000, forkoil: 6000,
       valve: 6000, brakefld: 10000, clutchcbl: 8000, airfilter: 6000,
@@ -63,5 +67,7 @@ export const DEFAULT_VEHICLES: Vehicle[] = [
       { id: 1, service: 'Oil & Filter Change', date: '2025-02-28', mileage: 12100, cost: 95, shop: 'HD Dealer', notes: '' },
       { id: 2, service: 'Air Filter',          date: '2024-06-01', mileage: 6000,  cost: 28, shop: 'DIY',       notes: '' },
     ],
+    documents: [],
+    loans: [],
   },
 ];

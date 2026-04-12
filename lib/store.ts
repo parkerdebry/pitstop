@@ -1,5 +1,11 @@
 'use client';
 
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import type { Vehicle, VehicleDocument, VehicleLoan, UserProfile } from './types';
+import { DEFAULT_VEHICLES } from './defaultData';
+import { defaultTrackingUnit } from './maintenance';
+
 // ── Admin emails — always get Pro access for free ────────────────────
 const ADMIN_EMAILS = [
   'parkerdebry@gmail.com',
@@ -10,8 +16,6 @@ export function isAdmin(email: string | null | undefined): boolean {
   if (!email) return false;
   return ADMIN_EMAILS.map(e => e.toLowerCase()).includes(email.toLowerCase());
 }
-
-import { defaultTrackingUnit } from './maintenance';
 
 // ─────────────────────────────────────────────
 // MIGRATION
