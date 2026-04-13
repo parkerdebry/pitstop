@@ -161,9 +161,9 @@ export default function Shell({ children }: { children: React.ReactNode }) {
             {hasRecalls && <div className="notif-dot"/>}
           </Link>
           {user ? (
-            <button onClick={handleSignOut} style={{ width:34, height:34, borderRadius:8, background:'var(--card)', border:'.5px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', fontSize:13, fontWeight:700, fontFamily:'var(--font-barlow-condensed)', color:'var(--accent)' }}>
+            <Link href="/profile" style={{ width:34, height:34, borderRadius:8, background:'var(--card)', border:'.5px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', fontSize:13, fontWeight:700, fontFamily:'var(--font-barlow-condensed)', color:'var(--accent)', textDecoration:'none' }}>
               {(user.name ?? user.email)[0].toUpperCase()}
-            </button>
+            </Link>
           ) : (
             <Link href="/auth" style={{ fontFamily:'var(--font-barlow-condensed)', fontSize:12, fontWeight:700, letterSpacing:'.5px', textTransform:'uppercase', color:'var(--accent)', textDecoration:'none', padding:'5px 10px', borderRadius:8, border:'.5px solid rgba(232,131,42,.3)', background:'rgba(232,131,42,.08)' }}>
               Sign in
