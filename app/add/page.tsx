@@ -24,6 +24,7 @@ export default function AddVehiclePage() {
   const nextId   = useStore(s => s.nextId);
 
   const [emoji,        setEmoji]        = useState<VehicleEmoji>('🚗');
+  const [nickname,     setNickname]     = useState('');
   const [year,         setYear]         = useState('');
   const [make,         setMake]         = useState('');
   const [model,        setModel]        = useState('');
@@ -66,16 +67,16 @@ export default function AddVehiclePage() {
     }
     const raw = parseInt(currentVal) || 0;
     addV({
-      emoji, year, make, model, trim,
+      emoji, nickname, year, make, model, trim,
       mileage:      isHours ? 0 : raw,
       engineHours:  isHours ? raw : 0,
       weeklyMiles:  parseInt(weekly) || 0,
       trackingUnit,
       licensePlate: licensePlate.toUpperCase(),
-      licensePlate: licensePlate.toUpperCase(),
       vin:          vin.toUpperCase(),
       photo:        null,
       recalls:      0,
+      smartcarId:   null,
       documents:    [],
       loans:        [],
       lastServiceMi:   {},
@@ -99,6 +100,13 @@ export default function AddVehiclePage() {
           <select className="form-select" value={emoji} onChange={e => onTypeChange(e.target.value)}>
             {VEHICLE_TYPES.map(t => <option key={t.emoji} value={t.emoji}>{t.label}</option>)}
           </select>
+        </div>
+
+        {/* Nickname */}
+        <div className="form-group">
+          <label className="form-label">Nickname <span style={{ opacity:.5, textTransform:'none', letterSpacing:0, fontSize:10 }}>(optional)</span></label>
+          <input className="form-input" placeholder="e.g. Daily Driver, Weekend Toy" value={nickname} onChange={e => setNickname(e.target.value)}/>
+          <div style={{ fontSize:11, color:'var(--text3)', marginTop:5 }}>Give your vehicle a name to easily identify it.</div>
         </div>
 
         {/* Tracking unit toggle */}

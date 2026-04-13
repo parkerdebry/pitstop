@@ -4,6 +4,7 @@ export const DEFAULT_VEHICLES: Vehicle[] = [
   {
     id: 1,
     emoji: '🚗',
+    nickname: '',
     year: '2019',
     make: 'Toyota',
     model: 'Camry',
@@ -41,6 +42,7 @@ export const DEFAULT_VEHICLES: Vehicle[] = [
   {
     id: 2,
     emoji: '🏍',
+    nickname: '',
     year: '2021',
     make: 'Harley-Davidson',
     model: 'Sportster',

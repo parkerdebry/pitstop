@@ -26,6 +26,7 @@ export default function EditVehiclePage() {
   const updateV     = useStore(s => s.updateVehicle);
 
   const [emoji,        setEmoji]        = useState<VehicleEmoji>('🚗');
+  const [nickname,     setNickname]     = useState('');
   const [year,         setYear]         = useState('');
   const [make,         setMake]         = useState('');
   const [model,        setModel]        = useState('');
@@ -40,6 +41,7 @@ export default function EditVehiclePage() {
   useEffect(() => {
     if (!v) return;
     setEmoji(v.emoji);
+    setNickname(v.nickname ?? '');
     setYear(v.year);
     setMake(v.make);
     setModel(v.model);
@@ -69,7 +71,7 @@ export default function EditVehiclePage() {
     if (!year || !make || !model) { alert('Please fill in year, make, and model'); return; }
     const raw = parseInt(currentVal) || 0;
     updateV(id, {
-      emoji, year, make, model, trim,
+      emoji, nickname, year, make, model, trim,
       mileage:      isHours ? v.mileage : raw,
       engineHours:  isHours ? raw : v.engineHours,
       weeklyMiles:  parseInt(weekly) || 0,
@@ -97,6 +99,12 @@ export default function EditVehiclePage() {
           <select className="form-select" value={emoji} onChange={e => onTypeChange(e.target.value as VehicleEmoji)}>
             {VEHICLE_TYPES.map(t => <option key={t.emoji} value={t.emoji}>{t.label}</option>)}
           </select>
+        </div>
+
+        {/* Nickname */}
+        <div className="form-group">
+          <label className="form-label">Nickname <span style={{ opacity:.5, textTransform:'none', letterSpacing:0, fontSize:10 }}>(optional)</span></label>
+          <input className="form-input" placeholder="e.g. Daily Driver, Weekend Toy" value={nickname} onChange={e => setNickname(e.target.value)}/>
         </div>
 
         {/* Tracking unit toggle */}

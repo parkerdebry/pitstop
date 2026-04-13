@@ -3,6 +3,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import type { Vehicle, VehicleDocument, VehicleLoan, UserProfile } from './types';
+import type { Language } from './i18n';
 import { DEFAULT_VEHICLES } from './defaultData';
 import { defaultTrackingUnit } from './maintenance';
 
@@ -37,6 +38,7 @@ function migrateVehicle(v: Partial<Vehicle> & { id: number }): Vehicle {
     vin:          v.vin          ?? '',
     photo:        v.photo        ?? null,
     recalls:      v.recalls      ?? 0,
+    nickname:     v.nickname     ?? '',
     smartcarId:   v.smartcarId   ?? null,
     lastServiceMi:   v.lastServiceMi   ?? {},
     lastServiceDate: v.lastServiceDate ?? {},
@@ -79,6 +81,7 @@ interface PitStopStore {
   nextId:      number;
   theme:       'dark' | 'light' | 'auto';
   accent:      string;
+  language:    Language;
   user:        UserProfile | null;
   tosAccepted: boolean;
   plan: 'free' | 'pro_monthly' | 'pro_annual';
@@ -107,6 +110,7 @@ interface PitStopStore {
   setPlan:       (p: 'free' | 'pro_monthly' | 'pro_annual') => void;
   setTheme:      (t: 'dark' | 'light' | 'auto') => void;
   setAccent:     (color: string) => void;
+  setLanguage:   (l: Language) => void;
 }
 
 // ─────────────────────────────────────────────
@@ -119,6 +123,7 @@ export const useStore = create<PitStopStore>()(
       nextId:      3,
       theme:       'auto',
       accent:      '#E8832A',
+      language:    'en',
       user:        null,
       tosAccepted: false,
       plan: 'free',
@@ -215,8 +220,9 @@ export const useStore = create<PitStopStore>()(
       setUser:   (u) => set({ user: u, plan: u && isAdmin(u.email) ? 'pro_annual' : get().plan }),
       acceptTos: () => set({ tosAccepted: true }),
       setPlan:   (p) => set({ plan: p }),
-      setTheme:  (t) => set({ theme: t }),
-      setAccent: (c) => set({ accent: c }),
+      setTheme:    (t) => set({ theme: t }),
+      setAccent:   (c) => set({ accent: c }),
+      setLanguage: (l) => set({ language: l }),
     }),
     {
       name:    'ps_vehicles',
@@ -244,5 +250,6 @@ export const useVehicles   = () => useStore(s => s.vehicles);
 export const useVehicle    = (id: number) => useStore(s => s.vehicles.find(v => v.id === id));
 export const useTheme      = () => useStore(s => s.theme);
 export const useAccent     = () => useStore(s => s.accent);
+export const useLanguage   = () => useStore(s => s.language);
 export const useUser       = () => useStore(s => s.user);
 export const useTosAccepted = () => useStore(s => s.tosAccepted);

@@ -26,6 +26,7 @@ export interface ServiceEntry {
 export interface Vehicle {
   id:           number;
   emoji:        VehicleEmoji;
+  nickname:     string;
   year:         string;
   make:         string;
   model:        string;
