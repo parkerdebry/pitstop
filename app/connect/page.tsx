@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, useCallback } from 'react';
+import { Suspense, useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useStore } from '@/lib/store';
 
@@ -49,7 +49,15 @@ interface SyncData {
   syncedAt: string;
 }
 
-export default function ConnectPage() {
+export default function ConnectPageWrapper() {
+  return (
+    <Suspense>
+      <ConnectPage />
+    </Suspense>
+  );
+}
+
+function ConnectPage() {
   const vehicles = useStore(s => s.vehicles);
   const updateV  = useStore(s => s.updateVehicle);
   const connected = vehicles.filter(v => v.smartcarId);
